@@ -1,0 +1,40 @@
+<div class="container">
+    <nav align='center'>
+        <h1>Registration Form</h1>
+    </nav>
+
+    <div class="newList">
+        <ul>
+            <!-- 3. new attribute [(ngModel)], the value is from/going to 'form.component.ts' -->
+            <li>Name: <input type="text" id="userName" [(ngModel)]="userInfo.userName" /></li>
+            <li>Gender:
+                <label for='male'>M</label><input type="radio" value='male' id="male" [(ngModel)]="userInfo.gender" />
+                <label for='female'>F</label><input type="radio" value='female' id="female"
+                    [(ngModel)]="userInfo.gender" />
+            </li>
+            <li>City: <select id="city" [(ngModel)]="userInfo.city">
+                    <!--
+                        <option value="Richmond">Richmond</option>
+                        <option value="Arlington">Arlington</option>
+                        <option value="Fairfax">Fairfax</option>
+                        -->
+                    <option [value]='city' *ngFor="let city of userInfo.cities; let key=index">{{city}}</option>
+                </select>
+            </li>
+            <li>
+                Hobby:
+                <span *ngFor="let hobby of userInfo.hobbies; let key=index">
+                    <input type="checkbox" [id]="'hobby'+ key" [(ngModel)]="hobby.checked" />{{hobby.title}}
+                </span>
+            </li>
+            <li>
+                <textarea id="detail" cols="30" rows="10" placeholder="I'm ..." [(ngModel)]="userInfo.detail" ></textarea>
+            </li>
+        </ul>
+
+        <button (click)='clickSubmit()'>Submit</button>
+    </div>
+
+    <!-- right -->
+    <pre>{{userInfo | json}}</pre>
+</div>
